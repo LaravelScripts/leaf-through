@@ -81,19 +81,24 @@ class RegisterController extends Controller
     /**
     * To confirm user email
     */
-    public function confirm(Request $request){
+    public function confirm(Request $request, $code){
 
-        $validator = Validator::make($request->all(), ["email"=> "required|email", "code"=> "required|min:20"]);
+        $validator = Validator::make($request->all(), [
+            "email"=> "required|email",
+            "code"=> "required|min:20"
+        ]);
 
-        abort_if($validator->fails(), 404, $validator->errors()); // remove and replace the line with proper message
+        $email = "me@sarav.co";
 
-        $exists = User::where('email', $request->input('email'))
-                        ->where('confirmation_hash', $request->input('code'))
+        //abort_if($validator->fails(), 404, $validator->errors()); // remove and replace the line with proper message
+
+        $exists = User::where('email', $email)
+                        ->where('confirmation_hash', $code)
                         //->whereRaw('unix_timestamp(confirmation_sent_at) <= now()') //Only 30 mins validity. Use appropiate code logic.
                         ->exists();
 
         if($exists){
-            $status= User::where('email', $request->input('email'))->where('confirmation_hash', $request->input('code'))->update(["is_confirmed"=>1]);
+            $status= User::where('email', $email)->where('confirmation_hash', $code)->update(["is_confirmed"=>1]);
             $status == 1 ? dd('Account activated') : dd('Something went wrong');
 
         }else{

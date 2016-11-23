@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/confirmation', 'Auth\RegisterController@confirm');
+Route::get('/confirmation/{code}', 'Auth\RegisterController@confirm');
 Route::post('/sendconfirmationemail', 'Auth\RegisterController@resendConfirmation');
 
 Route::group(['middleware'=> 'auth'], function(){
