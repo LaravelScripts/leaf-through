@@ -10,7 +10,8 @@
     <div class="container" id="app">
         <div class="row flexbox">
             <div class="col-md-8 col-md-offset-2 item">
-                <h1>Reset Password</h1>
+                <h1>Forgot Password</h1>
+                <p>Enter your email address below and we'll get you back on track. </p>
                 @if (session('status'))
                     <div class="help-block">
                         {{ session('status') }}
