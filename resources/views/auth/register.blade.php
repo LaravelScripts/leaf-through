@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register</title>
-    <link href="/css/login-register.css" rel="stylesheet">
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-</head>
-<body class="register">
+@extends('layouts.auth')
+
+@section('title', 'Register')
+@section('body-class', 'register')
+@section('content')
     <div class="container" id="app">
         <div class="sign-in">
             <span>Already have account?</span>
@@ -86,5 +76,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection

@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Forgot Password</title>
-    <link href="/css/login-register.css" rel="stylesheet">
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-</head>
-<body class="forgot-password">
+@extends('layouts.auth')
+
+@section('title', 'Forgot Password')
+@section('body-class', 'forgot-password')
+@section('content')
     <div class="create-account">
         <span>Don't have account?</span>
         <a href="{{ url('register') }}" class="get-started">GET STARTED</a>
@@ -34,7 +24,7 @@
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="johndoe@gmail.com" required>
 
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -56,5 +46,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
