@@ -120,6 +120,7 @@ form.form-horizontal {
     text-align: center;
     text-transform: uppercase;
     cursor: pointer;
+    margin-bottom: 1em;
     -webkit-transition: all .2s ease;
 	transition: all .2s ease;
 }
@@ -151,7 +152,7 @@ form.form-horizontal {
 .create-account,
 .sign-in {
     position: absolute;
-	width: 280px;
+	width: 300px;
 	right: 20px;
 	top: 20px;
 	color: #434C5F;
@@ -201,4 +202,35 @@ form.form-horizontal {
 	float: none;
 	display: inline-block;
 	margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+	.row.flexbox {
+		align-items: normal;
+	}
+
+	.flexbox .item {
+	    max-width: 280px;
+	    min-width: 250px;
+	    margin:0 auto 1em;
+	    padding-right: 8px;
+	}
+
+	.login h1,
+	.register h1,
+	.reset-password h1,
+	.forgot-password h1 {
+		font-size: 1.5em;
+		margin-top: 5em;
+	}
+
+	.forgot-password {
+		font-size: 12px;
+	}
+
+	.create-account,
+	.sign-in {
+		margin:0 10px;
+		right: 0
+	}
 }
