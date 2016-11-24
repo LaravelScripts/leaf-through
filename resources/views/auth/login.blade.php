@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link href="/css/login-register.css" rel="stylesheet">
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-</head>
-<body class="login">
+@extends('layouts.auth')
+
+@section('title', 'Login')
+@section('body-class', 'login')
+@section('content')
     <div class="container" id="app">
         <div class="create-account">
             <span>Don't have account?</span>
@@ -85,6 +75,4 @@
         </div>
     </div>
     <script src = "{{ asset('js/login.js') }}" type = "text/javascript"></script>
-</body>
-</html>
-
+@endsection

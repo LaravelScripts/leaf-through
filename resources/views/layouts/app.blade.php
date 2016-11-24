@@ -8,7 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"> 
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -22,66 +25,103 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+        <aside class="sidebar active">
+            <div class="sidebar-header">
+                <span class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <a class="brand-name">Leaf Through </a>
+                <form action="{{ url('logout') }}" method="POST">
+                    {{ csrf_field() }}
+                    <button type="submit" class="logout">
+                        <i class="ion-log-out"></i>
                     </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                </form>
             </div>
-        </nav>
-
-        @yield('content')
+            <form action="" method="POST" class="sidebar-form">
+                <input type="text" name="query" id="query" placeholder="Search..">
+            </form>
+            <div class="links">
+                <ul class="no-list-style">
+                    <li><a href="">Inbox <span class="badge">23</span></a></li>
+                    <li class="divider">Category</li>
+                    <li><a href="">Technology <span class="badge">8</span></a></li>
+                    <li><a href="">Electronics </a></li>
+                    <li><a href="">Internet of Things <span class="badge">13</span></a></li>
+                    <li><a href="">Augemented Reality <span class="badge">1</span></a></li>
+                </ul>
+            </div>
+            <div class="share-link active">
+                <a href="#share-link" data-toggle="modal">
+                    <i class="ion-ios-redo-outline"></i> Share Link
+                </a>
+            </div>
+        </aside>
+        <section class="main-container">
+            @yield('content')
+        </section>
+        <div class="maximum">
+            <a href="">
+                <i class="ion-android-expand"></i>
+            </a>
+        </div>
+        <div class="navigate-blog">
+            <a class="previous-blog">
+                <i class="ion-ios-arrow-up"></i>
+            </a>
+            <a class="next-blog">
+                <i class="ion-ios-arrow-down"></i>
+            </a>
+        </div>
     </div>
 
+    <div class="modal" id="share-link" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Share Link</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label for="link">Link<em>*</em></label>
+                            <input type="text" name="link" id="link" class="form-control"autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="to">To Address<em>*</em></label>
+                            <input type="text" name="to" id="to" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message (optional)</label>
+                            <textarea name="message" id="" cols="30" rows="3" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary">
+                                Share Link
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        jQuery(document).ready(function(){
+            $('.maximum > a').click(function(e){
+                e.preventDefault();
+                $('aside.sidebar').toggleClass('active');
+                $('.share-link').toggleClass('active');
+                $('section.main-container').toggleClass('active');
+            });
+        });
+    </script>
     <!--<script src="/js/app.js"></script>-->
     @yield('customjs')
 </body>

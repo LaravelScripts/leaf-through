@@ -7,3 +7,362 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	background-color: #fff;
+}
+
+a {
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+aside.sidebar {
+    position: fixed;
+    width: 240px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    margin-left: -240px;
+    background-color: #f2f2f2;
+    border-right: 1px solid #ededed;
+    overflow-y: scroll;
+}
+
+aside.sidebar.active {
+	margin-left: 0px;
+}
+
+.hamburger {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 6px;
+}
+
+.hamburger span {
+    padding: 1px 0 0 0;
+    width: 14px;
+    display: block;
+    background: #000;
+    margin: 5px;
+}
+
+.hamburger span:first-child {
+    margin-top: 14px;
+    width: 22px;
+}
+
+.hamburger span:last-child {
+    width: 20px;
+}
+
+.sidebar-form {
+	margin: 2em 10px;
+}
+
+.sidebar-form input {
+    width: 100%;
+    border-radius: 3px;
+    border: none;
+    padding: 5px 10px;
+    background-color: #e3e3e3;
+    font-family: $font-family-sans-serif;
+}
+
+.logout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px 12px;
+    color: #434C5F !important;
+    font-size: 18px;
+    background: none;
+    border: none;
+}
+
+.brand-name {
+    color: #434C5F;
+    padding: 7px 0 0 60px;
+    display: inline-block;
+    font-size: 18px;
+}
+
+section.main-container {
+    margin-left: 240px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 2em;
+    min-height: 100vh;
+    width:980px;
+}
+
+section.main-container.active {
+	margin:0 auto;
+}
+
+.leaf-through-content {
+	font-family: $secondary-font-family;
+	font-weight: 300;
+	font-size: 17px;
+}
+
+.leaf-through-content h1,
+.leaf-through-content h2,
+.leaf-through-content h3,
+.leaf-through-content h4,
+.leaf-through-content h5,
+.leaf-through-content h6 {
+    font-weight: bold;
+}
+
+.leaf-through-content h1 {
+	color: rgba(0,0,0,.7);
+}
+
+.leaf-through-content p {
+    margin-top: 30px;
+    line-height: 30px;
+}
+
+.navigate-blog {
+    position: fixed;
+    width: 50px;
+    height: 60px;
+    right: 10px;
+    bottom: 25px;
+}
+
+.navigate-blog a {
+    display: block;
+    font-size: 30px;
+    margin-top: -14px;
+    padding: 0 10px;
+    text-align: center;
+    color: #787A7E;
+}
+
+.maximum {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 38px;
+    text-align: center;
+}
+
+.maximum a {
+    color: #787A7E;
+    font-size: 26px;
+}
+
+.leaf-through-content .card {
+    padding: 0 2em;
+}
+
+.author {
+    margin: 1em 0 2em;
+}
+
+.author .profile-image {
+    border-radius: 50%;
+}
+
+.author .name {
+    display: block;
+    font-size: 12px;
+    color: #00ab6b;
+}
+
+.author .published-on, 
+.author .read {
+    display: inline-block;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.44);
+    position: relative;
+    padding-right: 10px;
+}
+
+.author .description {
+    display: block;
+    font-size: 12px;
+    margin-top: 0px;
+    margin-bottom: -5px;
+    color: rgba(0, 0, 0, 0.44);
+}
+
+.author .published-on::after {
+    content: ".";
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    font-size: 16px;
+}
+
+.no-padding-left {
+	padding-left: 0;
+}
+
+.no-list-style {
+	list-style: none;
+	padding-left:0;
+}
+
+.links {
+    margin: 0 10px 70px;
+}
+
+.links li a {
+    display: block;
+    padding: 10px;
+    color: #434C5F;
+}
+
+.links li a:hover {
+    background-color: #e3e3e3;
+    border-radius: 3px;
+}
+
+.links li a .badge {
+    font-family: $secondary-font-family;
+    background-color: #00ab6b;
+    float: right;
+}
+
+.links li.divider {
+    margin: 0px 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bolder;
+    padding-bottom: 6px;
+    color: #00ab6b;
+}
+
+.sidebar .share-link {
+    position: fixed;
+    bottom: 0;
+    width: 240px;
+    margin-left:-240px;
+    padding: 15px 10px;
+    left: 0;
+    background: #f2f2f2;
+	border-top: 1px solid #eaeaea;
+}
+
+.sidebar .share-link.active {
+	margin-left:0;
+}
+
+.sidebar .share-link a {
+    display: block;
+    text-align: center;
+    border: 1px solid #02b875;
+    padding: 7px 7px 7px 36px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #02b875;
+    border-radius: 3px;
+    position: relative;
+    -webkit-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+.sidebar .share-link a:hover,
+.sidebar .share-link a:focus,
+.sidebar .share-link a:active {
+	background: #00ab6b;
+	border-color: #00ab6b;
+	color: #fff;
+}
+
+.share-link a i {
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 50px;
+}
+
+blockquote {
+    font-family: "Tangerine", sans-serif;
+    font-size: 40px;
+    width: 78%;
+    text-align: center;
+    border: none;
+    margin: 0 auto;
+}
+
+.modal label {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    color: #434C5E;
+    display: inline-block;
+}
+
+.modal .form-control {
+	font-family: $font-family-sans-serif;
+	box-shadow: none !important;
+	display: block;
+	width: 92%;
+	border: 1px solid #D4D9E2;
+	border-radius: 3px;
+	padding: 10px 15px;
+	margin-bottom: 1.5em;
+	font-size: 14px;
+	color: #596377;
+	outline: 0;
+	-webkit-transition: border-color .2s ease;
+	transition: border-color .2s ease;
+	resize: none;
+}
+
+.modal .form-control:focus {
+	border-color: #8C96A9;
+}
+
+.form-control::-webkit-input-placeholder {
+   font-family: $font-family-sans-serif;
+}
+
+.form-control:-moz-placeholder { /* Firefox 18- */
+   font-family: $font-family-sans-serif;
+}
+
+.form-control::-moz-placeholder {  /* Firefox 19+ */
+   font-family: $font-family-sans-serif;
+}
+
+.form-control:-ms-input-placeholder {  
+   font-family: $font-family-sans-serif;
+}
+
+.btn.btn-primary {
+	font-family: $font-family-sans-serif;
+    background: #02b875;
+    border: none;
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 1em;
+    -webkit-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active {
+	background: #00ab6b;
+	border-color: #00ab6b;
+	color: #fff;
+}
+
