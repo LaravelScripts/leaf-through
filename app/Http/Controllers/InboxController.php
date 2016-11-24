@@ -21,17 +21,17 @@ class InboxController extends Controller
 
     public function send(Request $request){
     	
-    	$validator = \Validator::make($request->all(), [ "text"=>"required|min:10|max:140", 
-    														"link"=>"required|url", 
-    														"sender"=>"required|integer"
-    													]);
+    	$validator = \Validator::make($request->all(), [ 
+            "text" => "required|min:10|max:140", 
+			"link"   => "required|url", 
+			"sender" => "required|integer"
+		]);
 
     	if($validator->fails()){
     		return response()->json($validator->errors());
     	}
 
     	//Check if sender is valid
-    	
     	dd($this->inboxContract->send());
     }
 }

@@ -70,11 +70,11 @@ class LoginController extends Controller
 
         $request->has('remember') == true ? \Auth::login($user, true) : \Auth::login($user);
 
-        return redirect()->intended('inbox');
+        return redirect()->intended('home');
 
          if (\Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'is_confirmed' => 1])) {
             // Authentication passed...
-            return redirect()->intended('inbox');
+            return redirect()->intended('home');
         }else{
             return back()->withInput()->withErrors(['failed'=>'User Email/ Credentials do not match']);
         }
