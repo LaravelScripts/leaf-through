@@ -9,8 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <!-- Styles -->
@@ -45,12 +45,14 @@
             </form>
             <div class="links">
                 <ul class="no-list-style">
-                    <li><a href="">Inbox <span class="badge">23</span></a></li>
+                    <li><a href="">Inbox <span class="badge">{{ $inbox->count() }}</span></a></li>
                     <li class="divider">Category</li>
-                    <li><a href="">Technology <span class="badge">8</span></a></li>
-                    <li><a href="">Electronics </a></li>
-                    <li><a href="">Internet of Things <span class="badge">13</span></a></li>
-                    <li><a href="">Augemented Reality <span class="badge">1</span></a></li>
+                    @foreach($categoryGroups as $categoryGroup)
+                      <li><a href="">{{ $categoryGroup->name }}
+                      <span class="badge">
+                        {{ $categoryGroup->categorizedMail->count() }}
+                      </span></a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="share-link active">
