@@ -8,6 +8,6 @@ class Inbox extends Model
 {
     //
     public function senderDetails(){
-    	$this->belongsTo('App\User','sender_id');
+    	return $this->belongsTo('App\User','sender_id');
     }
 }
