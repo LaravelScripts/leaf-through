@@ -2,9 +2,9 @@
 namespace App\Repositories;
 
 use App\CategoryGroup;
-use App\Contracts\CrudContract;
+use App\Contracts\CategoryGroupsContract;
 
-class CategoryGroupRepository implements CrudContract{
+class CategoryGroupRepository implements CategoryGroupsContract{
 
   /**
   * To display all the categories of a particular user.
@@ -28,4 +28,6 @@ class CategoryGroupRepository implements CrudContract{
   public function withCategorizedMail(){
     return CategoryGroup::with('categorizedMail')->where('user_id', \Auth::user()->id)->get();
   }
+
+  public function show(){}
 }
