@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_confirmed')->default(0);
             $table->string('confirmation_hash', 200)->nullable();
             $table->timestamp('confirmation_sent_at')->nullable();
+            $table->string('slack_webhook_url', 200)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
