@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\{User, TempUser};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Traits\JsonResponse;
 
 use Illuminate\Http\Request;
+use App\Contracts\{MailboxContract, UserContract};
 
 class RegisterController extends Controller
 {
@@ -53,12 +54,11 @@ class RegisterController extends Controller
     /**
     * TODO: attach message in login redirect
     */
-    public function register(Request $request){
+    public function register(Request $request, MailboxContract $mailbox, UserContract $userRepo){
 
         $this->validate($request, ['name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed']);
-
+            'password' => 'required|min:6']);
 
         $user = new User;
         $user->name = $request->input('name');
@@ -67,6 +67,16 @@ class RegisterController extends Controller
         $user->confirmation_hash = str_random(50); //Have to change
         $user->confirmation_sent_at = \Carbon\Carbon::now();
         $user->save();
+
+        //Check if user exists in temp_users table.
+        $tempUserDatas = TempUser::where('email', $request->input('email'))->get();
+        if($tempUserDatas->count() > 0){
+          //Store in mailbox table
+          $mailbox->migrateFromTempUser($user->id, $tempUserDatas);
+
+          //Free the temp_users table.
+          $userRepo->deleteTempUser($request->input('email'));
+        }
 
         // Find a way to handle error if any
         if($user->wasRecentlyCreated){
