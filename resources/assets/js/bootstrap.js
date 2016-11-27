@@ -19,6 +19,9 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 
+//import VueRouter from 'vue-router'
+//window.Vue.use(VueRouter)
+
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
  * the outgoing requests issued by this application. The CSRF middleware
@@ -37,9 +40,11 @@ Vue.http.interceptors.push((request, next) => {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from "laravel-echo"
+ import Echo from "laravel-echo"
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
+ window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: 'localhost:6001'
+    //broadcaster: 'pusher',
+    //key: '9bfa63e212d8b0da44b8'
+  });
