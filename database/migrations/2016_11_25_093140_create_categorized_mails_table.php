@@ -17,8 +17,8 @@ class CreateCategorizedMailsTable extends Migration
             $table->increments('id');
             $table->integer('category_group_id')->unsigned();
             $table->foreign('category_group_id')->references('id')->on('category_groups');
-            $table->integer('inbox_id')->unsigned();
-            $table->foreign('inbox_id')->references('id')->on('inboxes');
+            $table->integer('mailbox_id')->unsigned();
+            $table->foreign('mailbox_id')->references('id')->on('mailbox');
             $table->timestamps();
         });
     }
