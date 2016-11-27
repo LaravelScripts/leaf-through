@@ -5,6 +5,9 @@ use Readability\Readability;
 
 trait ReadabilityMode{
 
+  /**
+  *
+  */
   function readableFormat($url){
     // you can use whatever you want to retrieve the html content (Guzzle, Buzz, cURL ...)
     $html = file_get_contents($url);
