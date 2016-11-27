@@ -1,6 +1,8 @@
 <?php
 namespace App\Contracts;
 
-interface CategoryGroupsContract{
+use App\Contracts\CrudContract;
+
+interface CategoryGroupsContract extends CrudContract{
   public function show();
 }
