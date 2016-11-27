@@ -45,7 +45,7 @@
             </form>
             <div class="links">
                 <ul class="no-list-style">
-                    <li><a href="">Inbox <span class="badge">{{ $inbox->count() }}</span></a></li>
+                    <li><a href="">Inbox <span class="badge">{{ $mailbox->count() }}</span></a></li>
                     <li class="divider">Category</li>
                     @foreach($categoryGroups as $categoryGroup)
                       <li><a href="">{{ $categoryGroup->name }}
@@ -87,25 +87,25 @@
                     <h4 class="modal-title">Share Link</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+
                         <div class="form-group">
                             <label for="link">Link<em>*</em></label>
                             <input type="text" name="link" id="link" class="form-control"autofocus>
                         </div>
                         <div class="form-group">
                             <label for="to">To Address<em>*</em></label>
-                            <input type="text" name="to" id="to" class="form-control">
+                            <input type="text" name="to" v-model= "recipient" id="to" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="message">Message (optional)</label>
-                            <textarea name="message" id="" cols="30" rows="3" class="form-control"></textarea>
+                            <textarea name="message" id="message" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" v-on:click = "share">
                                 Share Link
                             </button>
                         </div>
-                    </form>
+
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -114,6 +114,7 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
         jQuery(document).ready(function(){
             $('.maximum > a').click(function(e){
@@ -125,6 +126,15 @@
         });
     </script>
     <!--<script src="/js/app.js"></script>-->
+    <script src = "{{ asset('js/dashboard.js') }}"></script>
+
+    <script>
+      Echo.private('inbox-{{ Auth::user()->id }}' )
+        .listen('LinkShared', (e) => {
+          console.log('psuher');
+          console.log(e);
+        });
+    </script>
     @yield('customjs')
 </body>
 </html>
