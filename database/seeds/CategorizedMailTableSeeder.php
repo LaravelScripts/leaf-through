@@ -15,12 +15,12 @@ class CategorizedMailTableSeeder extends Seeder
         //
         $new = new CategorizedMail;
         $new->category_group_id = 1;
-        $new->inbox_id = 1;
+        $new->mailbox_id = 1;
         $new->save();
 
         $new = new CategorizedMail;
         $new->category_group_id = 1;
-        $new->inbox_id = 2;
+        $new->mailbox_id = 2;
         $new->save();
     }
 }
