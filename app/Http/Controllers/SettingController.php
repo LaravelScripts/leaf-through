@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Setting;
 use Illuminate\Http\Request;
 
+use App\Contracts\UserContract;
+
 class SettingController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class SettingController extends Controller
      *
      * @return  \Illuminate\Http\RedirectResponse
      */
-    public function postForm(Request $request) : \Illuminate\Http\RedirectResponse {
+    public function postForm(Request $request, UserContract $user) : \Illuminate\Http\RedirectResponse {
 
     	$this->validate($request, $this->buildRules());
 
@@ -31,6 +33,11 @@ class SettingController extends Controller
     		$setting = Setting::where('name', $key)->first();
             ($setting) ? $this->save($setting, $value) : null;
     	});
+
+        if($request->has('slack_hook')){
+            //Save to user table
+            $user->saveSlackWebhook($request->input('slack_hook'));
+        }
 
         // Remove already cached settings.
         // getAllSettings() in helpers.php will take care of re-caching.
