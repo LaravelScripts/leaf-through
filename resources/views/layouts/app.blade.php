@@ -45,10 +45,10 @@
             </form>
             <div class="links">
                 <ul class="no-list-style">
-                    <li><a href="">Inbox <span class="badge">{{ $mailbox->count() }}</span></a></li>
-                    <li><a href=""><i class="ion-ios-folder-outline"></i> Inbox <span class="badge">{{ $mailbox->count() }}</span></a></li>
+                    <li><a href=""><i class="ion-ios-folder-outline"></i> Inbox <span class="badge">{{ mailbox()->count() }}</span></a></li>
                     <li><a href="{{ url('archives') }}"><i class="ion-ios-box-outline"></i> Archives</a></li>
                     <li><a href="{{ url('settings') }}"><i class="ion-ios-gear-outline"></i> Settings</a></li>
+                    <?php $categoryGroups = categories(); ?>
                     @if (count($categoryGroups))
                     <li class="divider">Category</li>
                     @foreach($categoryGroups as $categoryGroup)

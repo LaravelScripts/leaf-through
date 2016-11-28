@@ -33,8 +33,9 @@ class HomeController extends Controller
   */
   public function index()
   {
-    $this->readableFormat("https://laravel-news.com/2016/06/look-whats-coming-laravel-5-3/");
-    return view('home', ['mailbox' => $this->mailbox->show(), 'categoryGroups' => $this->categoryGroup->withCategorizedMail()]);
+    // $data = $this->readableFormat("https://laravel-news.com/2016/06/look-whats-coming-laravel-5-3/");
+
+    return view('home');
   }
 
 }

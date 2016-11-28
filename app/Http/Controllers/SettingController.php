@@ -7,38 +7,62 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function getForm()
-    {
+    /**
+     * Gets the settings form.
+     *
+     * @return   \Illuminate\View\View  The form.
+     */
+    public function getForm() : \Illuminate\View\View {
     	return view('settings.form');
     }
 
-    public function postForm(Request $request)
-    {
-    	$settings = getAllSettings();
+    /**
+     * Process the settings form.
+     *
+     * @param   \Illuminate\Http\Request  $request  The request
+     *
+     * @return  \Illuminate\Http\RedirectResponse
+     */
+    public function postForm(Request $request) : \Illuminate\Http\RedirectResponse {
 
-    	$rules = collect($settings)->filter(function($value) {
-    		return $value->required;
-    	})->mapWithKeys(function($value) {
-    		return [$value->name => 'required'];
-    	})->toArray();
-
-    	$this->validate($request, $rules);
+    	$this->validate($request, $this->buildRules());
 
     	collect($request->all())->each(function($value, $key) {
     		$setting = Setting::where('name', $key)->first();
-    		$this->save($setting);
+            ($setting) ? $this->save($setting, $value) : null;
     	});
 
+        // Remove already cached settings.
+        // getAllSettings() in helpers.php will take care of re-caching.
     	cache()->forget('settings');
 
     	return back();
     }
 
-    private function save($setting)
-    {
-    	if ($setting) {
-			$setting->value = $value;
-			$setting->save();
-		}	
+    /**
+     * Builds rules for validation
+     *
+     * @return  array  The rules.
+     */
+    private function buildRules() :array{
+
+        $settings = getAllSettings();
+
+        return collect($settings)->filter(function($value) {
+            return $value->required;
+        })->mapWithKeys(function($value) {
+            return [$value->name => 'required'];
+        })->toArray();
+    }
+
+    /**
+     * Saves setting instance
+     *
+     * @param      <type>  $setting  The setting
+     * @param      <type>  $value    The value
+     */
+    private function save(Setting $setting, string $value) {
+		$setting->value = $value;
+		$setting->save();
     }
 }
