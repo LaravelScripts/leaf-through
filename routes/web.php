@@ -24,4 +24,7 @@ Route::post('/sendconfirmationemail', 'Auth\RegisterController@resendConfirmatio
 
 Route::group(['middleware'=> 'auth'], function(){
 	Route::get('inbox', 'InboxController@messages');
+
+	Route::get('settings', 'SettingController@getForm');
+	Route::post('settings', 'SettingController@postForm');
 });

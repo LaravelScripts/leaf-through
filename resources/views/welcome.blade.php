@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <title>Leaf Through</title>
+        <title>{{ setting('app_name') }}</title>
 
         <link rel="stylesheet" href="{{ asset("css/home.css") }}">
     </head>
@@ -27,13 +27,12 @@
         </div>
         <div class="introduction">
             <span>Introducing</span>
-            <h1>Leaf Through</h1>
+            <h1>{{ setting('app_name') }}</h1>
             <p>
                 Enjoy distraction free reading of your favorite articles across websites anywhere.
             </p>
             <a href="{{ url('register') }}" class="get-started">Get Started</a>
         </div>
-        <div class="bg-img"></div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>

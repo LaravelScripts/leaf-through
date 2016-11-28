@@ -18,3 +18,17 @@ function timeToRead($text) {
 
 	return $min . ' mins read';
 }
+
+function getAllSettings()
+{
+	return cache()->rememberForever('settings', function () {
+    	return \DB::table('settings')->get();
+	});
+}
+
+function setting($item)
+{
+	return collect(getAllSettings())->filter(function($value, $key) use ($item) {
+		return $value->name === $item;
+	})->pluck('value')->first();
+}

@@ -5,6 +5,18 @@
 @section('content')
     <div class="leaf-through-content">
         <div class="card">
+            <div class="options">
+                <a href="#" class="post-options">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+                <ul class="hidden">
+                    <li><a href="#share-link" data-toggle="modal">Share</a></li>
+                    <li><a href="">Archive</a></li>
+                    <li><a href="">Delete</a></li>
+                </ul>
+            </div>
             <div class="author">
                 <div class="row">
                     <div class="col-sm-1">
@@ -70,6 +82,41 @@
                 <p>Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.</p>
             
             </div>
+            <div class="modal" id="share-link" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Share Link</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <div class="form-group">
+                                    <label for="to">To Address<em>*</em></label>
+                                    <input type="text" name="to" id="to" class="form-control"  placeholder="Enter the email address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message (optional)</label>
+                                    <textarea name="message" id="" cols="30" rows="3" class="form-control"  placeholder="Enter the message"></textarea>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <input type="checkbox" name="slack_notification" id="slack_notification">
+                                    <label for="slack_notification">Send Slack Notification</label>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <input type="checkbox" name="send_annotation" id="send_annotation">
+                                    <label for="send_annotation">Send with Annotation</label>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">
+                                        Share Link
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
     </div>
 @endsection

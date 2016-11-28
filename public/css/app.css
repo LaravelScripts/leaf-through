@@ -7710,6 +7710,7 @@ aside.sidebar {
   background-color: #f2f2f2;
   border-right: 1px solid #ededed;
   overflow-y: scroll;
+  z-index: 9;
 }
 
 aside.sidebar.active {
@@ -7767,9 +7768,10 @@ aside.sidebar.active {
 
 .brand-name {
   color: #434C5F;
-  padding: 7px 0 0 60px;
+  padding: 7px 0 0 9px;
   display: inline-block;
   font-size: 18px;
+  width: 200px;
 }
 
 section.main-container {
@@ -7826,7 +7828,9 @@ section.main-container.active {
   color: #787A7E;
 }
 
-.maximum {
+.maximum a {
+  color: #787A7E;
+  font-size: 26px;
   position: fixed;
   top: 10px;
   right: 10px;
@@ -7835,13 +7839,57 @@ section.main-container.active {
   text-align: center;
 }
 
-.maximum a {
-  color: #787A7E;
-  font-size: 26px;
+.leaf-through-content .card {
+  padding: 1em 2em 0;
+  position: relative;
 }
 
-.leaf-through-content .card {
-  padding: 0 2em;
+.card .options {
+  position: absolute;
+  right: 0;
+  z-index: 9;
+}
+
+.options a.post-options {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+}
+
+.options .post-options span {
+  background-color: #636b6f;
+  width: 4px;
+  height: 4px;
+  display: block;
+  margin: 8px;
+  border-radius: 50%;
+}
+
+.options ul {
+  padding-left: 0;
+  list-style: none;
+  position: absolute;
+  left: -120px;
+  font-size: 12px;
+  top: 7px;
+  border: 1px solid #f2f2f2;
+  background: #f2f2f2;
+}
+
+.options ul a {
+  padding: 8px 10px;
+  display: block;
+  text-align: left;
+  width: 110px;
+  border-radius: 3px;
+  color: #636b6f !important;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.options ul a:hover {
+  background-color: #e4e4e4;
+  border-radius: 0;
 }
 
 .author {
@@ -7905,6 +7953,11 @@ section.main-container.active {
 .links li a:hover {
   background-color: #e3e3e3;
   border-radius: 3px;
+}
+
+.links li a i {
+  margin-right: 5px;
+  font-size: 16px;
 }
 
 .links li a .badge {
@@ -7976,7 +8029,9 @@ blockquote {
   margin: 0 auto;
 }
 
-.modal label {
+.modal label,
+.settings label {
+  font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 12px;
@@ -7984,15 +8039,24 @@ blockquote {
   display: inline-block;
 }
 
-.modal .form-control {
+.form-group {
+  margin-bottom: 1.5em;
+}
+
+.form-group.checkbox {
+  margin-bottom: 10px;
+  font-family: "Raleway", sans-serif;
+}
+
+.modal .form-control,
+.settings .form-control {
   font-family: "Raleway", sans-serif;
   box-shadow: none !important;
   display: block;
   width: 92%;
   border: 1px solid #D4D9E2;
   border-radius: 3px;
-  padding: 10px 15px;
-  margin-bottom: 1.5em;
+  padding: 8px 15px;
   font-size: 14px;
   color: #596377;
   outline: 0;
@@ -8001,8 +8065,19 @@ blockquote {
   resize: none;
 }
 
-.modal .form-control:focus {
+.modal .form-control:focus,
+.settings .form-control:focus {
   border-color: #8C96A9;
+}
+
+.modal .checkbox label {
+  padding-left: 20px;
+  color: #787878;
+  font-weight: 400;
+}
+
+.modal .checkbox input[type="checkbox"] {
+  margin-left: 0px;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -8046,6 +8121,115 @@ blockquote {
   background: #00ab6b;
   border-color: #00ab6b;
   color: #fff;
+}
+
+.modal .btn.btn-primary,
+.settings .btn.btn-primary {
+  font-family: "Raleway", sans-serif;
+  background: #fff;
+  border: none;
+  color: #02b875;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 1em;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  border: 1px solid #02b875;
+}
+
+.modal .btn.btn-primary:hover,
+.modal .btn.btn-primary:focus,
+.modal .btn.btn-primary:active,
+.settings .btn.btn-primary:hover,
+.settings .btn.btn-primary:focus,
+.settings .btn.btn-primary:active {
+  background-color: #02b875;
+  color: #fff;
+}
+
+@media (min-width: 240px) and (max-width: 480px) {
+  section.main-container {
+    padding: 1em;
+    width: 100%;
+    opacity: .2;
+  }
+  section.main-container.active {
+    opacity: 1;
+  }
+  .leaf-through-content .card {
+    padding: 3em 1em 0;
+  }
+  .author {
+    margin: 1em 0 2em;
+    text-align: center;
+  }
+  .leaf-through-content h1 {
+    font-size: 26px;
+  }
+  .leaf-through-content p {
+    margin-top: 20px;
+    line-height: 24px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  blockquote {
+    width: 100%;
+    line-height: 40px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  section.main-container {
+    padding: 1em;
+    width: 100%;
+    max-width: 488px;
+    opacity: .2;
+  }
+  section.main-container.active {
+    opacity: 1;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 980px) {
+  section.main-container {
+    padding: 1em;
+    width: 100%;
+    max-width: 700px;
+  }
+  section.main-container.active {
+    max-width: 100%;
+  }
+  .leaf-through-content h1 {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1024px) {
+  section.main-container {
+    padding: 1em;
+    width: 100%;
+    max-width: 744px;
+  }
+  section.main-container.active {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+  section.main-container {
+    padding: 1em;
+    width: 100%;
+    max-width: 920px;
+  }
+  section.main-container.active {
+    max-width: 100%;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */
