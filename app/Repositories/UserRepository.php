@@ -38,6 +38,12 @@ class UserRepository implements UserContract{
     return;
   }
 
+  public function saveSlackWebhook($webhook): bool{
+      $user = User::find(\Auth::user()->id);
+      $user->slack_webhook_url = $webhook;
+      return $user->save();
+  }
+
   public function create(){}
   public function read(){}
   public function update(){}
