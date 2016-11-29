@@ -13,21 +13,20 @@ class MailboxRepository implements MailboxContract{
 	* To display all the messages of a particular user. I miss PHPSTORM.
 	*/
 	public function show(): \Illuminate\Database\Eloquent\Collection{
-		return Mailbox::join('users', 'mailbox.sender_id', '=', 'users.id')->where('mailbox.user_id', \Auth::user()->id)->select('mailbox.url', 'mailbox.message', 'users.name as sender')->get();
+
+		return Mailbox::join('users', 'mailbox.sender_id', '=', 'users.id')
+                        ->join('articles', 'mailbox.article_id', '=', 'articles.id')
+                        ->where('articles.user_id', \Auth::user()->id)
+                        ->select('articles.url', 'mailbox.message', 'users.name as sender')
+                        ->get();
 	}
 
 	/**
 	*
 	*/
-	public function store($recipient ,$url, $message): Mailbox{
-
-		$inbox = new Mailbox;
-        $inbox->message = $message;
-        $inbox->url = $url;
-        $inbox->sender_id = \Auth::user()->id;
-        $inbox->user_id = $recipient;
-        $inbox->save();
-        return $inbox;
+	public function store(\Illuminate\Support\Collection  $mailBoxCollection){
+		Mailbox::insert( $mailBoxCollection->toArray());
+        return;
 	}
 
   public function migrateFromTempUser(int $user, \Illuminate\Database\Eloquent\Collection $tempUserDatas){
@@ -43,6 +42,7 @@ class MailboxRepository implements MailboxContract{
 	public function test(){
 		return Mailbox::find(1);
 	}
+
 
 
   public function create(){}

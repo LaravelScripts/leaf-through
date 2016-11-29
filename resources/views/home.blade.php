@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('customjs')
-  
+
 @endsection
 
 @section('content')
@@ -97,18 +97,18 @@
                             <form action="" method="POST">
                                 <div class="form-group">
                                     <label for="to">To Address<em>*</em></label>
-                                    <input type="text" v-model= "recipient" name="to" id="to" class="form-control"  placeholder="Enter the email address">
+                                    <input type="text" name="to" v-model = "to" id="to" class="form-control"  placeholder="Enter the email address">
                                 </div>
                                 <div class="form-group">
                                     <label for="message">Message (optional)</label>
-                                    <textarea name="message" id="" cols="30" rows="3" class="form-control"  placeholder="Enter the message"></textarea>
+                                    <textarea name="message" v-model = "message" cols="30" rows="3" class="form-control"  placeholder="Enter the message"></textarea>
                                 </div>
                                 <div class="form-group checkbox">
-                                    <input type="checkbox" name="slack_notification" id="slack_notification">
+                                    <input type="checkbox" name="slack_notification" v-model = "slack_notification" id = "slack_notification">
                                     <label for="slack_notification">Send Slack Notification</label>
                                 </div>
                                 <div class="form-group checkbox">
-                                    <input type="checkbox" name="send_annotation" id="send_annotation">
+                                    <input type="checkbox" name="send_annotation" v-model = "send_annotation" id="send_annotation">
                                     <label for="send_annotation">Send with Annotation</label>
                                 </div>
                                 <div class="form-group">

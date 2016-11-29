@@ -15,16 +15,20 @@ class MailboxTableSeeder extends Seeder
         //
         $inbox = new Mailbox;
         $inbox->message = "Message 1";
-        $inbox->url = "http://test1.com";
-        $inbox->recipient_id = 1;
-        $inbox->user_id = 1;
+        $inbox->article_id = 1;
+        $inbox->sender_id = 2;
         $inbox->save();
 
         $inbox = new Mailbox;
         $inbox->message = "Message 2";
-        $inbox->url = "http://test2.com";
-        $inbox->recipient_id = 1;
-        $inbox->user_id = 1;
+        $inbox->article_id = 2;
+        $inbox->sender_id = 2;
+        $inbox->save();
+
+        $inbox = new Mailbox;
+        $inbox->message = "Message 3";
+        $inbox->article_id = 3;
+        $inbox->sender_id = 1;
         $inbox->save();
     }
 }

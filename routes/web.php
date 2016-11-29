@@ -22,9 +22,9 @@ Route::post('/sendconfirmationemail', 'Auth\RegisterController@resendConfirmatio
 
 Route::group(['middleware'=> 'auth'], function(){
   	Route::get('/home', 'HomeController@index');
-  	Route::post('/emailsuggestion', 'ShareLink@recipientSuggestion');
-  	Route::post('/share', 'ShareLink@send');
-  	Route::any('/extracthtml', 'ShareLink@htmlcontents'); //Change it to appropiate later
+  	Route::post('/emailsuggestion', 'ShareLinkController@recipientSuggestion');
+  	Route::post('/share', 'ShareLinkController@send');
+  	Route::post('/savearticle', 'ArticleController@store'); //Change it to appropiate later
 	Route::get('inbox', 'InboxController@messages');
 
 	Route::get('settings', 'SettingController@getForm');

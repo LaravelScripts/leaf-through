@@ -1,20 +1,24 @@
 require('./bootstrap');
 
-const app = new Vue({
+const app2 = new Vue({
   el: "#share-link",
   data: {
-    recipient: ''
+    to: '',
+    message: '',
+    slack_notification: '',
+    send_annotation: '',
+    link: 'http://sarav.co'
   },
   watch: {
-    recipient: function(newvalue){
-      if(newvalue.length > 3){
+    to: function(newValue){
+      if(newValue.length > 3){
         this.autocomplete(newvalue);
       }
     }
   },
   methods: {
     autocomplete: function(text){
-      this.$http.post('/emailsuggestion', {text: document.getElementById('to').value}).then((response) => {
+      this.$http.post('/emailsuggestion', {text: this.to}).then((response) => {
       // set data on vm
           if(response.body.error){
               console.log(response.body.message);
@@ -29,13 +33,11 @@ const app = new Vue({
     },
 
     share: function(event){
+      event.preventDefault();
       //event.target.disabled = 'true';
-      var link = document.getElementById('link').value;
-      var message = document.getElementById('message').value;
-      var to = document.getElementById('to').value;
 
       //POST
-      this.$http.post('/share', {link:link, to:to, message:message}).then((response) => {
+      this.$http.post('/share', {url:this.link, to:this.to, message:this.message}).then((response) => {
       // set data on vm
           if(response.body.error){
               console.log(response.body.message);
@@ -48,13 +50,20 @@ const app = new Vue({
           // error callback
       });
     },
+  }
+});
 
+const app = new Vue({
+  el: "#add-link",
+  data: {
+  },
+  methods: {
     extractHtml: function(){
       //POST
-      this.$http.post('/extracthtml', {url: "http://martinbean.co.uk/blog/2014/09/08/whats-new-in-laravel-5/"}).then((response) => {
+      this.$http.post('/savearticle', {url: document.getElementById('link').value}).then((response) => {
       // set data on vm
           if(response.body.error){
-              console.log(response.body.message);
+            console.log(response.body.message);
           }else{
             console.log(response.body.data);
           }
