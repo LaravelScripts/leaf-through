@@ -34,7 +34,6 @@ class HomeController extends Controller
   public function index()
   {
     // $data = $this->readableFormat("https://laravel-news.com/2016/06/look-whats-coming-laravel-5-3/");
-
     return view('home');
   }
 
