@@ -44,5 +44,5 @@ function mailbox() :  \Illuminate\Support\Collection {
 
 function categories() : \Illuminate\Support\Collection {
     $categoryGroupRepo = new CategoryGroupRepository;
-    return $categoryGroupRepo->withCategorizedMail();
+    return $categoryGroupRepo->withCategorizedArticle();
 }
