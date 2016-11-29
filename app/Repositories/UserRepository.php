@@ -33,6 +33,10 @@ class UserRepository implements UserContract{
     return User::where('email', $email)->select('id')->first();
   }
 
+  public function byEmails($emails){
+      return User::whereIn('email', $emails)->select('id', 'email')->get();
+  }
+
   public function deleteTempUser($email){
     TempUser::where('email', $email)->delete();
     return;
