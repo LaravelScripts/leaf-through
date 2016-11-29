@@ -25,8 +25,8 @@ class CategoryGroupRepository implements CategoryGroupsContract{
     return CategoryGroup::where('user_id', \Auth::user()->id)->get();
   }
 
-  public function withCategorizedMail(){
-    return CategoryGroup::with('categorizedMail')->where('user_id', \Auth::user()->id)->get();
+  public function withCategorizedArticle(){
+    return CategoryGroup::with('categorizedArticle')->where('user_id', \Auth::user()->id)->get();
   }
 
   public function show(){}
