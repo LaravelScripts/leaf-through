@@ -16,16 +16,18 @@ class LinkShared implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
-    private $mailbox;
+    private $recipientId;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Mailbox $mailbox)
+    public function __construct(int $recipientId)
     {
         //
-        $this->mailbox = $mailbox;
+        $this->recipientId = $recipientId;
+        $this->user = \Auth::user()->name;
         Log::info("LinkShared Event fired at ".\Carbon\Carbon::now());
     }
 
@@ -36,7 +38,7 @@ class LinkShared implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        Log::info("LinkShared Broadcast fired at ".\Carbon\Carbon::now()." for user ".$this->mailbox->user_id);
-        return new PrivateChannel('inbox-'.$this->mailbox->user_id);
+        Log::info("LinkShared Broadcast fired at ".\Carbon\Carbon::now()." for user ".$this->recipientId);
+        return new PrivateChannel('inbox-'.$this->recipientId);
     }
 }
