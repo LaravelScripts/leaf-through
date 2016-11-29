@@ -15,11 +15,10 @@ class CreateMailboxTable extends Migration
     {
         Schema::create('mailbox', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('sender_id')->unsigned();
             $table->foreign('sender_id')->references('id')->on('users');
-            $table->string('url', 200);
+            $table->integer('article_id')->unsigned();
+            $table->foreign('article_id')->references('id')->on('articles');
             $table->string('message', 140);
             $table->timestamps();
         });
