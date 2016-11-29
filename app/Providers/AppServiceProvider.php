@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Contracts\MailboxContract', 'App\Repositories\MailboxRepository');
         $this->app->bind('App\Contracts\CategoryGroupsContract', 'App\Repositories\CategoryGroupRepository');
         $this->app->bind('App\Contracts\UserContract', 'App\Repositories\UserRepository');
+        $this->app->bind('App\Contracts\ArticleContract', 'App\Repositories\ArticleRepository');
     }
 }
