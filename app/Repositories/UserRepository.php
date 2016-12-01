@@ -34,7 +34,7 @@ class UserRepository implements UserContract{
   }
 
   public function byEmails($emails){
-      return User::whereIn('email', $emails)->select('id', 'email')->get();
+      return User::whereIn('email', $emails)->select('id', 'email', 'slack_webhook_url')->get();
   }
 
   public function deleteTempUser($email){
