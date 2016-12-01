@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('url', 200);
+            $table->string('title', 100)->nullable();
             $table->string('author', 100)->nullable();
             $table->string('author_image', 100)->nullable();
             $table->string('published_at', 50)->nullable();
