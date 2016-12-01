@@ -1,5 +1,27 @@
 require('./bootstrap');
 
+const app3 = new Vue({
+    el: "#article-actions",
+    methods: {
+      deleteArticle: function(){
+        var pathArray = window.location.pathname.split( '/' );
+
+        this.$http.delete('/article/delete/'+pathArray[2]).then((response) => {
+        // set data on vm
+            if(response.body.error){
+              console.log(response.body.message);
+            }else{
+              console.log(response.body.data);
+            }
+            //this.$set('someData', response.body);
+
+        }, (response) => {
+            // error callback
+        });
+      }
+    }
+});
+
 const app2 = new Vue({
   el: "#share-link",
   data: {
@@ -7,7 +29,6 @@ const app2 = new Vue({
     message: '',
     slack_notification: '',
     send_annotation: '',
-    link: 'http://sarav.co'
   },
   watch: {
     to: function(newValue){
@@ -36,8 +57,9 @@ const app2 = new Vue({
       event.preventDefault();
       //event.target.disabled = 'true';
 
+      var pathArray = window.location.pathname.split( '/' );
       //POST
-      this.$http.post('/share', {url:this.link, to:this.to, message:this.message}).then((response) => {
+      this.$http.post('/share', {article:pathArray[2], to:this.to, message:this.message}).then((response) => {
       // set data on vm
           if(response.body.error){
               console.log(response.body.message);
