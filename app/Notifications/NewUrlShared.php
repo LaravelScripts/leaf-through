@@ -15,15 +15,16 @@ class NewUrlShared extends Notification
 {
     use Queueable;
 
-    private $user;
+    private $message;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
         //
+        $this->message = $message;
 
     }
 
@@ -73,6 +74,6 @@ class NewUrlShared extends Notification
     */
     public function toSlack($notifiable)
     {
-      return (new SlackMessage)->from('LeafThrough')->content('Hello! I am laravel notification');
+      return (new SlackMessage)->from('LeafThrough')->content('Hi! '.\Auth::user()->name.' shared a new link with you with the message:'.$this->message);
     }
 }
