@@ -34,9 +34,34 @@ class ArticleController extends Controller
         if(array_key_exists("error", $articleData)){
             return $this->jsonError("Unable to fetch Article.");
         }
-        
+
         $articleData['url'] = $request->input('url');
         return $article->save($articleData) == true ? $this->jsonSuccess('Article saved successfully') : $this->jsonError('Error in insertion');
+
+    }
+
+    public function view(Request $request, $id, ArticleContract $articleContract){
+
+        $article = $articleContract->fetch($id);
+        
+        if(is_null($article)){
+            abort(404);
+        }
+        if(\Gate::allows('access-article', $article)){
+            return view('home', compact('article'));
+        }
+
+        abort(404);
+    }
+
+    public function delete(Request $request, $id, ArticleContract $articleContract){
+
+        $article = $articleContract->fetch($id);
+        if(\Gate::allows('access-article', $article)){
+            return $article->delete($article->id) == true ? $this->jsonError("Article deleted successfully") : $this->jsonError("Unable to delete article");
+        }else{
+            return $this->jsonError("Unauthorized access");
+        }
 
     }
 }
