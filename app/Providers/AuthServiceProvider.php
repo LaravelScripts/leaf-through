@@ -30,8 +30,12 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->id == $inbox->user_id) && ($inbox->id == $categoryGroup->inbox_id);
         });
 
-         Gate::define('access-inbox', function ($user, $inbox) {
+        Gate::define('access-inbox', function ($user, $inbox) {
             return $user->id == $inbox->user_id;
         });
+
+        Gate::define('access-article', function ($user, $article) {
+           return $user->id == $article->user_id;
+       });
     }
 }
