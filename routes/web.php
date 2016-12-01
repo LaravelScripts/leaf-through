@@ -24,7 +24,9 @@ Route::group(['middleware'=> 'auth'], function(){
   	Route::get('/home', 'HomeController@index');
   	Route::post('/emailsuggestion', 'ShareLinkController@recipientSuggestion');
   	Route::post('/share', 'ShareLinkController@send');
-  	Route::post('/savearticle', 'ArticleController@store'); //Change it to appropiate later
+  	Route::post('/savearticle', 'ArticleController@store');
+    Route::get('/article/{id}', 'ArticleController@view')->where('id','[0-9]+');
+    Route::delete('/article/delete/{id}', 'ArticleController@delete')->where('id','[0-9]+');
 	Route::get('inbox', 'InboxController@messages');
 
 	Route::get('settings', 'SettingController@getForm');
