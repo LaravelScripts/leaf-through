@@ -36,9 +36,15 @@ class ShareLinkController extends Controller
   * Bug: 'url' => 'required|url' , url part is causing issue
   */
   public function send(Request $request, ArticleContract $article){
-    $validator = \Validator::make($request->all(), ['url' => 'required', 'to' => 'required', 'message' => 'sometimes|required|min:10|max:140']);
+    $validator = \Validator::make($request->all(), ['article' => 'required|integer|min:1|exists:articles,id', 'to' => 'required', 'message' => 'sometimes|required|min:10|max:140']);
     if($validator->fails()){
       return $this->jsonError($validator->messages());
+    }
+
+    $articleData = $article->fetch($request->input('article'));
+
+    if(\Gate::denies('access-article', $articleData)){
+        return $this->jsonError("You are not allowed to share the article");
     }
 
     /**
@@ -52,34 +58,32 @@ class ShareLinkController extends Controller
     if($inviteRecipients->count() > 0){
         $inviteRecipients->each(function ($email) use ($request){
             $when = \Carbon\Carbon::now()->addMinutes(10);
-
+            $this->user->storeTemp($email, $articleData->url, $request->input('message'));
             \Mail::to($email)->send(new InviteUser($email, $request->input('message')));//->later($when, new OrderShipped($order));
         });
     }
 
     //Insert into Article table
     if($existingRecipients->count() > 0){
-        //Fetch the copy
-        $articleClone = $article->urlMatch($request->input('url'));
 
-        $existingRecipientsId = $existingRecipients->pluck('id');
-        $firstInsertId = $article->saveForRecipients($articleClone->toArray(), $existingRecipientsId);
+        $firstInsertId = $article->saveForRecipients($articleData->toArray(), $existingRecipients->pluck('id'));
 
         $mailBoxCollection = collect([]);
-        for($i = 0; $i < $existingRecipientsId->count(); $i++){
+        for($i = 0; $i < $existingRecipients->count(); $i++){
             $mailBoxCollection->push(['sender_id' => $request->user()->id, 'article_id' => $firstInsertId, 'message' => $request->input('message'),'updated_at' => \Carbon\Carbon::now(), 'created_at' =>  \Carbon\Carbon::now()]);
             $firstInsertId++;
         }
 
         $this->mailbox->store($mailBoxCollection);
 
-        //Fire the Event to broadcast
-        $existingRecipientsId->each(function($id){
-            event(new \App\Events\LinkShared($id));
+        $existingRecipients->each(function($recipient) use ($request){
+            //Fire the Event to broadcast
+            event(new \App\Events\LinkShared($recipient->id));
+
+            //Send Notification for email and slack
+            $recipient->notify(new \App\Notifications\NewUrlShared($request->input('message')));
         });
 
-        //Send Notification for email and slack
-        //$request->user()->notify(new \App\Notifications\NewUrlShared());
     }
 
     return $this->jsonSuccess("Article shared successfully.");
