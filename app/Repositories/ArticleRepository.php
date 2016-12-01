@@ -11,6 +11,7 @@ class ArticleRepository implements ArticleContract{
           $article = new Article;
           $article->user_id = \Auth::user()->id;
           $article->url = $articleData['url'];
+          $article->title = $articleData['title'];
           $article->content = $articleData['content'];
           $article->save();
           return $article;
@@ -22,7 +23,7 @@ class ArticleRepository implements ArticleContract{
       public function saveForRecipients(array $articleData, \Illuminate\Support\Collection $recipients): int{
           $massInsert = collect([]);
           $recipients->each(function ($id) use ($massInsert, $articleData){
-              $massInsert->push(["user_id" => $id , "url"=> $articleData['url'], "content"=> $articleData['content'], "updated_at"=> \Carbon\Carbon::now(),"created_at" => \Carbon\Carbon::now()]);
+              $massInsert->push(["user_id" => $id , "url"=> $articleData['url'], "title" => $articleData['title'],"content"=> $articleData['content'], "updated_at"=> \Carbon\Carbon::now(),"created_at" => \Carbon\Carbon::now()]);
           });
 
           Article::insert($massInsert->toArray());
@@ -34,9 +35,15 @@ class ArticleRepository implements ArticleContract{
           return Article::where('url', $url)->where('user_id', \Auth::user()->id)->first();
       }
 
+      public function fetch($id){
+          return Article::where('id', $id)->first(); //Gate read-article will take care of user. ->where('user_id', \Auth::user()->id)
+      }
 
       public function create(){}
       public function read(){}
       public function update(){}
-      public function delete(){}
+
+      public function delete($id){
+          return Article::delete($id);
+      }
 }
