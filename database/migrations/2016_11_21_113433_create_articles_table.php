@@ -22,7 +22,7 @@ class CreateArticlesTable extends Migration
             $table->string('author', 100)->nullable();
             $table->string('author_image', 100)->nullable();
             $table->string('published_at', 50)->nullable();
-            $table->text('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }
