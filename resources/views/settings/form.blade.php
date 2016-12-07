@@ -11,11 +11,11 @@
 	{{ csrf_field() }}
 	<div class="form-group">
 		<label for="app_name">Application Name<em>*</em></label>
-		<input type="text" name="app_name" id="app_name" class="form-control" autofocus placeholder="Enter your application name" value="{{ setting('app_name') }}">
+		<input type="text" name="app_name" id="app_name" class="form-control" autofocus placeholder="Enter your application name" value="">
 	</div>
 	<div class="form-group">
 		<label for="slack_hook">Slack Hook</label>
-		<input type="text" name="slack_hook" id="slack_hook" class="form-control" placeholder="Enter your Slack Hook" value="{{ setting('slack_hook') }}">
+		<input type="text" name="slack_hook" id="slack_hook" class="form-control" placeholder="Enter your Slack Hook" value="{{ \Auth::user()->slack_webhook_url }}">
 		<p class="help-block">Enter your slack hook above to integrate slack notification</p>
 	</div>
 	<div class="form-group">
