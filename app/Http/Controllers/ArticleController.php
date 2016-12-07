@@ -19,23 +19,22 @@ class ArticleController extends Controller
           return $this->jsonError($validator->messages());
         }
 
+
         if(!is_null($article->urlMatch($request->input('url')))){
             return $this->jsonError("Article Exists.");
         }
 
-        $html = file_get_contents($request->input('url'));
-        /*libxml_use_internal_errors(true);
-        $dom = new \DOMDocument;
-        $dom->loadHtmlFile($html);
-        $xpath = new \DOMXpath($dom);
+        try{
+            $articleData = $this->readableFormat(trim($request->input('url')));
+        }catch(\Exception $e){
+            return $this->jsonError($e->getMessage());
+        }
 
-        dd($xpath->query('//div/[@itemprop="description"]')->item(0)->nodeValue);*/
-        $articleData = $this->readableFormat($request->input('url'), $html);
         if(array_key_exists("error", $articleData)){
             return $this->jsonError("Unable to fetch Article.");
         }
 
-        $articleData['url'] = $request->input('url');
+
         return $article->save($articleData) == true ? $this->jsonSuccess('Article saved successfully') : $this->jsonError('Error in insertion');
 
     }
@@ -43,7 +42,7 @@ class ArticleController extends Controller
     public function view(Request $request, $id, ArticleContract $articleContract){
 
         $article = $articleContract->fetch($id);
-        
+
         if(is_null($article)){
             abort(404);
         }
