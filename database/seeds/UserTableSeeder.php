@@ -16,8 +16,8 @@ class UserTableSeeder extends Seeder
     	//$faker = new \Faker\Generator;
         $user = new User;
         $user->name = "User 1";
-        $user->email = "xyz@xyz.com";
-        $user->password = bcrypt('asdfgh');
+        $user->email = "me@sarav.co";
+        $user->password = bcrypt('admin123');
         $user->is_confirmed = 1;
         $user->save();
 

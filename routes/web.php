@@ -27,7 +27,7 @@ Route::group(['middleware'=> 'auth'], function(){
   	Route::post('/savearticle', 'ArticleController@store');
     Route::get('/article/{id}', 'ArticleController@view')->where('id','[0-9]+');
     Route::delete('/article/delete/{id}', 'ArticleController@delete')->where('id','[0-9]+');
-	Route::get('inbox', 'InboxController@messages');
+	Route::get('inbox', 'MailboxController@messages');
 
 	Route::get('settings', 'SettingController@getForm');
 	Route::post('settings', 'SettingController@postForm');

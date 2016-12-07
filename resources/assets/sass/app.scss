@@ -15,6 +15,14 @@ body {
 	background-color: #fff;
 }
 
+@font-face {
+    font-family: 'FiraCode Regular';
+    src: url('/../fonts/FiraCode-Regular.otf'); /* IE9 Compat Modes */
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 a {
 	text-decoration: none !important;
 	outline: none !important;
@@ -340,15 +348,6 @@ section.main-container.active {
     left: 50px;
 }
 
-blockquote {
-    font-family: "Tangerine", sans-serif;
-    font-size: 40px;
-    width: 78%;
-    text-align: center;
-    border: none;
-    margin: 0 auto;
-}
-
 .modal label,
 .settings label {
     font-family: $font-family-sans-serif;
@@ -470,6 +469,82 @@ blockquote {
     color:#fff;
 }
 
+.inbox .messages {
+    padding: 15px;
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 0;
+}
+
+.messages .row {
+    padding: 10px 0;
+    border-top: 1px solid #f2f2f2;
+}
+
+textarea.crayon-plain {
+    display: none;
+}
+
+.crayon-table {
+    width: 100%;
+}
+
+.crayon-table .crayon-code p {
+    margin-top: 0px;
+    line-height: 20px;
+}
+
+.crayon-table .crayon-num {
+    margin: 0;
+    display: none;
+}
+
+.crayon-table .crayon-num {
+    margin: 0;
+    display: none;
+}
+
+.crayon-table .crayon-code {
+    background: #f2f2f2;
+    padding: 20px 25px;
+    width: 100%;
+    border-radius: 3px;
+    font-family:"FiraCode-Retina", "FiraCode-Regular", sans-serif;
+}
+
+.leaf-through-content .card a {
+    color: #00ab6b !important;
+}
+
+.crayon-theme-github .crayon-pre span {
+    font-family: "FiraCode Regular", sans-serif !important;
+}
+
+.inbox .messages .row {
+    padding: 10px 0;
+    border-top: 1px solid #e6e6e6;
+}
+
+.inbox .messages .row.new {
+    font-weight: bold;
+    background: #f0f0f0;
+    position:relative
+}
+
+.inbox .messages .author {
+    margin: 0;
+}
+
+.inbox .messages .row.new .title::before {
+    content: "";
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    background: #00ab6b;
+    position: absolute;
+    left: 0;
+    top: 8px;
+}
+
 @media (min-width:240px) and (max-width: 480px) {
     section.main-container {
         padding: 1em;
@@ -499,11 +574,6 @@ blockquote {
         line-height: 24px;
         font-size: 15px;
         color: rgba(0,0,0,.8);
-    }
-
-    blockquote {
-        width:100%;
-        line-height: 40px;
     }
 }
 

@@ -15,8 +15,18 @@ class MailboxController extends Controller
     	$this->mailboxContract = $mailboxContract;
     }
 
-    public function messages(Request $request){
-    	dd($this->mailboxContract->show());
+    /**
+     * Returns the inbox page
+     *
+     * @param   \Illuminate\Http\Request  $request  The request
+     *
+     * @return  \Illuminate\View\View
+     */
+    public function messages(Request $request) : \Illuminate\View\View {
+
+    	$messages = $this->mailboxContract->show();
+        
+        return view('inbox.messages', compact('messages'));
     }
 
     public function send(Request $request){

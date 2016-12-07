@@ -1,0 +1,19 @@
+{
+	"appKey": "uf3drgderiaseo2l4qgdmi6fdk4815halsi8rumq279s86o2joqnqamtaftg",
+	"authHost": "http://reader.app/",
+	"authEndpoint": "/broadcasting/auth",
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": "127.0.0.1",
+	"port": "6001",
+	"referrers": [],
+	"socketio": {},
+	"sslCertPath": "",
+	"sslKeyPath": ""
+}
