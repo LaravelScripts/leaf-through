@@ -13,6 +13,8 @@ class ArticleRepository implements ArticleContract{
           $article->url = $articleData['url'];
           $article->title = $articleData['title'];
           $article->content = $articleData['content'];
+          $article->author = $articleData['author'];
+          $article->published_at = $articleData['date_published'];
           $article->save();
           return $article;
       }
